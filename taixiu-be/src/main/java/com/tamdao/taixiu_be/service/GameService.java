@@ -7,6 +7,7 @@ import com.tamdao.taixiu_be.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,7 +43,7 @@ public class GameService {
     private double payoutRatio;
     
     public GameSessionResponse getCurrentGame() {
-        GameSession game = gameSessionRepository.findCurrentGame()
+        GameSession game = gameSessionRepository.findFirstByStatusNotOrderByStartTimeDesc(GameSession.GameStatus.COMPLETED)
                 .orElse(null);
         
         if (game == null) {
@@ -72,7 +73,7 @@ public class GameService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         
-        GameSession game = gameSessionRepository.findCurrentGame()
+        GameSession game = gameSessionRepository.findFirstByStatusNotOrderByStartTimeDesc(GameSession.GameStatus.COMPLETED)
                 .orElseThrow(() -> new RuntimeException("No active game session"));
         
         if (game.getStatus() != GameSession.GameStatus.BETTING) {
@@ -232,7 +233,7 @@ public class GameService {
     }
     
     public List<GameSessionResponse.GameHistoryItem> getGameHistory() {
-        return gameSessionRepository.findLast10CompletedGames()
+        return gameSessionRepository.findCompletedGames(PageRequest.of(0, 10))
                 .stream()
                 .map(g -> GameSessionResponse.GameHistoryItem.builder()
                         .id(g.getId())

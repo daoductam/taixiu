@@ -2,6 +2,7 @@ package com.tamdao.taixiu_be.repository;
 
 import com.tamdao.taixiu_be.entity.GameSession;
 import com.tamdao.taixiu_be.entity.GameSession.GameStatus;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,12 +17,10 @@ public interface GameSessionRepository extends JpaRepository<GameSession, Long> 
     
     Optional<GameSession> findFirstByStatusOrderByStartTimeDesc(GameStatus status);
     
-    @Query("SELECT g FROM GameSession g WHERE g.status != 'COMPLETED' ORDER BY g.startTime DESC LIMIT 1")
-    Optional<GameSession> findCurrentGame();
+    Optional<GameSession> findFirstByStatusNotOrderByStartTimeDesc(GameStatus status);
     
-    @Query("SELECT g FROM GameSession g WHERE g.status = 'COMPLETED' ORDER BY g.endTime DESC LIMIT 10")
-    List<GameSession> findLast10CompletedGames();
+    @Query("SELECT g FROM GameSession g WHERE g.status = 'COMPLETED' ORDER BY g.endTime DESC")
+    List<GameSession> findCompletedGames(Pageable pageable);
     
-    @Query("SELECT g FROM GameSession g ORDER BY g.startTime DESC LIMIT 1")
-    Optional<GameSession> findLatestGame();
+    Optional<GameSession> findFirstByOrderByStartTimeDesc();
 }
