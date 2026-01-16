@@ -1,0 +1,336 @@
+:root {
+  /* Colors - Dark Casino Theme */
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-tertiary: #1a1a25;
+  --bg-card: linear-gradient(145deg, #1a1a25 0%, #12121a 100%);
+  
+  /* Gold/Accent */
+  --gold-primary: #ffd700;
+  --gold-secondary: #ffec8b;
+  --gold-dark: #daa520;
+  --gold-gradient: linear-gradient(135deg, #ffd700 0%, #ffec8b 50%, #daa520 100%);
+  
+  /* Game Colors */
+  --tai-color: #ff6b6b;
+  --tai-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+  --xiu-color: #4ecdc4;
+  --xiu-gradient: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+  
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-muted: #666666;
+  
+  /* Status */
+  --success: #4ade80;
+  --error: #ef4444;
+  --warning: #f59e0b;
+  
+  /* Effects */
+  --glow-gold: 0 0 20px rgba(255, 215, 0, 0.5);
+  --glow-tai: 0 0 20px rgba(255, 107, 107, 0.5);
+  --glow-xiu: 0 0 20px rgba(78, 205, 196, 0.5);
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold-dark);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-primary);
+}
+
+/* Utilities */
+.gold-text {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glow-gold {
+  box-shadow: var(--glow-gold);
+}
+
+.glass {
+  background: rgba(26, 26, 37, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px) rotate(-5deg); }
+  75% { transform: translateX(5px) rotate(5deg); }
+}
+
+@keyframes diceRoll {
+  0% { transform: rotateX(0) rotateY(0); }
+  25% { transform: rotateX(180deg) rotateY(90deg); }
+  50% { transform: rotateX(360deg) rotateY(180deg); }
+  75% { transform: rotateX(540deg) rotateY(270deg); }
+  100% { transform: rotateX(720deg) rotateY(360deg); }
+}
+
+.animate-pulse { animation: pulse 2s ease-in-out infinite; }
+.animate-spin { animation: spin 1s linear infinite; }
+.animate-bounce { animation: bounce 1s ease-in-out infinite; }
+.animate-slideIn { animation: slideIn 0.3s ease-out; }
+.animate-shake { animation: shake 0.5s ease-in-out; }
+.animate-dice { animation: diceRoll 1s ease-in-out; }
+
+/* Button Base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-gold {
+  background: var(--gold-gradient);
+  color: var(--bg-primary);
+}
+
+.btn-gold:hover:not(:disabled) {
+  box-shadow: var(--glow-gold);
+  transform: translateY(-2px);
+}
+
+.btn-tai {
+  background: var(--tai-gradient);
+  color: white;
+}
+
+.btn-tai:hover:not(:disabled) {
+  box-shadow: var(--glow-tai);
+  transform: translateY(-2px);
+}
+
+.btn-xiu {
+  background: var(--xiu-gradient);
+  color: white;
+}
+
+.btn-xiu:hover:not(:disabled) {
+  box-shadow: var(--glow-xiu);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--gold-primary);
+  color: var(--gold-primary);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: var(--gold-primary);
+  color: var(--bg-primary);
+}
+
+/* Input Base */
+.input {
+  width: 100%;
+  padding: var(--spacing-md);
+  background: var(--bg-secondary);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border-color var(--transition-fast);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--gold-primary);
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Card Base */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  padding: var(--spacing-lg);
+}
+
+/* Layout */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Game specific styles */
+.dice {
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--bg-primary);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dice.rolling {
+  animation: diceRoll 0.5s ease-in-out infinite;
+}
+
+.timer-ring {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.timer-ring circle {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.timer-ring .bg {
+  stroke: var(--bg-tertiary);
+}
+
+.timer-ring .progress {
+  stroke: var(--gold-primary);
+  stroke-dasharray: 283;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  transition: stroke-dashoffset 1s linear;
+}
+
+/* Chat styles */
+.chat-message {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-sm);
+  animation: slideIn 0.2s ease-out;
+}
+
+.chat-message.ai {
+  background: linear-gradient(135deg, rgba(78, 205, 196, 0.2) 0%, rgba(78, 205, 196, 0.1) 100%);
+  border-left: 3px solid var(--xiu-color);
+}
+
+.chat-message.user {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .dice {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,61 @@
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8
+    container_name: taixiu-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: taixiu_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - taixiu-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Spring Boot Backend
+  backend:
+    build:
+      context: ./taixiu-be
+      dockerfile: Dockerfile
+    container_name: taixiu-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/taixiu_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      JWT_SECRET: ${JWT_SECRET:-TaiXiuGameSecretKey}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - taixiu-network
+    restart: unless-stopped
+
+  # React Frontend with Nginx
+  frontend:
+    build:
+      context: ./taixiu-fe
+      dockerfile: Dockerfile
+    container_name: taixiu-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - taixiu-network
+    restart: unless-stopped
+
+networks:
+  taixiu-network:
+    driver: bridge
+
+volumes:
+  mysql_data:

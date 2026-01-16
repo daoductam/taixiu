@@ -1,0 +1,159 @@
+.dice-container {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.dice-container.loading {
+  min-height: 200px;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.session-code {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-full);
+}
+
+.game-status {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.game-status.betting {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  color: var(--gold-primary);
+}
+
+.game-status.spinning {
+  background: linear-gradient(135deg, rgba(78, 205, 196, 0.2) 0%, rgba(78, 205, 196, 0.1) 100%);
+  border: 1px solid rgba(78, 205, 196, 0.3);
+  color: var(--xiu-color);
+}
+
+.game-status.completed {
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.2) 0%, rgba(74, 222, 128, 0.1) 100%);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  color: var(--success);
+}
+
+.status-icon {
+  font-size: 1.5rem;
+}
+
+.countdown {
+  background: rgba(0, 0, 0, 0.3);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  min-width: 45px;
+  text-align: center;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.countdown.urgent {
+  background: rgba(239, 68, 68, 0.5);
+  color: #fff;
+  animation: pulse 0.5s infinite;
+}
+
+.game-status .tai {
+  color: var(--tai-color);
+}
+
+.game-status .xiu {
+  color: var(--xiu-color);
+}
+
+.dice-row {
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+.dice {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(145deg, #ffffff 0%, #e0e0e0 100%);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    inset 0 2px 5px rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.dice.rolling {
+  animation: diceRoll 0.3s ease-in-out infinite;
+}
+
+.dice.show {
+  animation: diceReveal 0.5s ease-out;
+}
+
+@keyframes diceReveal {
+  0% { transform: scale(0.5) rotateY(180deg); }
+  50% { transform: scale(1.2) rotateY(90deg); }
+  100% { transform: scale(1) rotateY(0); }
+}
+
+.total-display {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--radius-full);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.total-display.tai {
+  background: var(--tai-gradient);
+  color: white;
+  box-shadow: var(--glow-tai);
+}
+
+.total-display.xiu {
+  background: var(--xiu-gradient);
+  color: white;
+  box-shadow: var(--glow-xiu);
+}
+
+.total-label {
+  opacity: 0.9;
+}
+
+.total-value {
+  font-size: 2rem;
+}
+
+.timer-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.timer-progress {
+  height: 100%;
+  background: var(--gold-gradient);
+  border-radius: var(--radius-full);
+  transition: width 1s linear;
+}

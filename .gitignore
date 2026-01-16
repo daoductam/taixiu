@@ -1,0 +1,21 @@
+# Ignore all
+*
+
+# Except these
+!.gitignore
+!README.md
+!docker-compose.yml
+!.env.example
+!.github/
+!.github/**
+!taixiu-be/
+!taixiu-be/**
+!taixiu-fe/
+!taixiu-fe/**
+
+# Ignore in subdirectories
+**/node_modules/
+**/target/
+**/.env
+**/dist/
+**/*.log
