@@ -70,11 +70,7 @@ export default function LoginPage() {
           Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link>
         </p>
         
-        <div className="auth-demo">
-          <p>🎮 Demo accounts:</p>
-          <code>admin / admin123</code>
-          <code>player1 / player123</code>
-        </div>
+
       </div>
     </div>
   );

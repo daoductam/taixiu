@@ -44,11 +44,7 @@ npm run dev
 - Frontend: http://localhost:5173
 - Backend API: http://localhost:8080
 
-### Demo Accounts
-| Role | Username | Password |
-|------|----------|----------|
-| Admin | admin | admin123 |
-| Player | player1 | player123 |
+
 
 ## 🐳 Docker Deployment
 
